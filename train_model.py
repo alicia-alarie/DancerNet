@@ -1,6 +1,7 @@
 from keras.preprocessing.image import ImageDataGenerator
 from keras.callbacks import LearningRateScheduler
 from keras.optimizers import SGD
+from keras.models import model_from_json
 from cnn.resnet import ResNet
 from cnn import config
 from sklearn.metrics import classification_report
@@ -132,3 +133,8 @@ plt.xlabel("Epoch #")
 plt.ylabel("Loss/Accuracy")
 plt.legend(loc="lower left")
 plt.savefig(args["plot"])
+
+model_json = model.to_json()
+with open("mdm.json", "w") as json_file:
+    json_file.write(model_json)
+model.save_weights("mdm.h5")
