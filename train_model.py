@@ -99,9 +99,9 @@ model.compile(loss="binary_crossentropy", optimizer=opt,
 callbacks = [LearningRateScheduler(poly_decay)]
 H = model.fit_generator(
 	trainGen,
-	steps_per_epoch=totalTrain // bs,
+	steps_per_epoch=totalTrain // BS,
 	validation_data=valGen,
-	validation_steps=totalVal // bs,
+	validation_steps=totalVal // BS,
 	epochs=num_epochs,
 	callbacks=callbacks)
 
@@ -109,7 +109,7 @@ H = model.fit_generator(
 print("[INFO] evaluating network...")
 testGen.reset()
 predIdxs = model.predict_generator(testGen,
-	steps=(totalTest // bs) + 1)
+	steps=(totalTest // BS) + 1)
  
 # finds the index of the label with largest predicted probability of each
 # testing image 
@@ -138,3 +138,4 @@ model_json = model.to_json()
 with open("mdm.json", "w") as json_file:
     json_file.write(model_json)
 model.save_weights("mdm.h5")
+
