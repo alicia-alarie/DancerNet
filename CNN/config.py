@@ -1,11 +1,11 @@
 import os
 
 # initialize the path to the original input directory of images
-orig_input_dataset = "malaria/cell_images"
+orig_input_dataset = "C:\\Users\\alici\\Google Drive\\Research\\Data Preprocessing\\Images"
 
 # initialize the base path to the new directory that will contain
 # our images after computing the training and testing split
-base_path = "malaria"
+base_path = "C:\\Users\\alici\\Google Drive\\Research\\Images"
 
 # derive the training, validation, and testing directories
 train_path = os.path.sep.join([base_path, "training"])
