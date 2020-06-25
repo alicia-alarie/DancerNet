@@ -1,9 +1,10 @@
 from keras.preprocessing.image import ImageDataGenerator
-from keras.callbacks import LearningRateScheduler
+#from keras.callbacks import LearningRateScheduler
+from tensorflow.keras.callbacks import LearningRateScheduler
 from keras.optimizers import SGD
 from keras.models import model_from_json
-from cnn.resnet import ResNet
-from cnn import config
+from CNN.resnet import ResNet
+from CNN import config
 from sklearn.metrics import classification_report
 from imutils import paths
 import matplotlib.pyplot as plt
@@ -23,8 +24,9 @@ args = vars(ap.parse_args())
 # define the # of epochs, initial learning rate and batch size
 num_epochs = 50
 init_lr= 1e-1
-bs = 32
- 
+BS = 32
+bs=32
+
 # create a function called polynomial decay which helps us decay our 
 # learning rate after each epoch
 
@@ -89,10 +91,10 @@ testGen = valAug.flow_from_directory(
 	batch_size=bs)
 
 # initialize our ResNet model and compile it
-model = ResNet.build(64, 64, 3, 2, (3, 4, 6),
-	(64, 128, 256, 512), reg=0.0005)
-opt = SGD(lr=init_lr, momentum=0.9)
-model.compile(loss="binary_crossentropy", optimizer=opt,
+model = ResNet.build(100, 38, 3, 10, (3, 4, 6),
+	(64, 128, 256, 512), reg=0.0005)#modified for images size 100x38x3 with 10 classes
+opt = SGD(lr=init_lr, momentum=0.9) 
+model.compile(loss="categorical_crossentropy", optimizer=opt,
 	metrics=["accuracy"])
 
 # define our set of callbacks and fit the model
